@@ -11,14 +11,14 @@ function InteriorPage() {
     <>
       <Seo
         title="Interior marble & stone solutions"
-        description="Marble flooring, cladding, kitchens, mandirs, and staircases by Niket Marble & Stone."
+        description="Marble flooring, cladding, kitchens, mandirs, and staircases by Niket Marble & Interior."
         path="/interior"
       />
       <SpaceLanding
         space="interior"
         title="Interior solutions"
         intro="Floors that hold chandelier light, kitchens that work hard, and sacred rooms carved in Makrana white."
-        heroImage="https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=2000&q=80"
+        heroImage="/Image/Interior/PG12012-1.png"
       />
     </>
   );

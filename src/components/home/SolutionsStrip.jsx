@@ -8,7 +8,7 @@ export default function SolutionsStrip() {
   const exterior = categories.filter((c) => c.space === 'exterior').slice(0, 2);
   const cards = [
     { title: 'Interior solutions', to: '/interior', items: interior, image: interior[0].image },
-    { title: 'Exterior solutions', to: '/exterior', items: exterior, image: exterior[0].image },
+    { title: 'Marble facades', to: '/exterior', items: exterior, image: exterior[0].image },
   ];
 
   return (
@@ -16,7 +16,7 @@ export default function SolutionsStrip() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
           <p className="text-[11px] uppercase tracking-[0.3em] text-gold-deep dark:text-gold-light">Spaces</p>
-          <h2 className="mt-3 font-display text-4xl sm:text-5xl">Interior and exterior stone, equally considered</h2>
+          <h2 className="mt-3 font-display text-4xl sm:text-5xl">Interior and marble surfaces, equally considered</h2>
         </Reveal>
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           {cards.map((card) => (

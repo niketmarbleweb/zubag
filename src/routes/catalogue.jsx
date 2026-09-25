@@ -2,19 +2,18 @@ import { useMemo } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import Seo from '../components/seo/Seo';
 import ProductCard from '../components/product/ProductCard';
-import { allProducts, finishes, spaces } from '../data/siteData';
+import { productCatalog, productCategories } from '../data/productCatalog';
 
 export const Route = createFileRoute('/catalogue')({
   validateSearch: (search) => ({
     q: typeof search.q === 'string' ? search.q : '',
-    space: search.space === 'interior' || search.space === 'exterior' ? search.space : '',
-    finish: typeof search.finish === 'string' ? search.finish : '',
+    category: productCategories.includes(search.category) ? search.category : '',
   }),
   component: CataloguePage,
 });
 
 function CataloguePage() {
-  const { q, space, finish } = Route.useSearch();
+  const { q, category } = Route.useSearch();
   const navigate = Route.useNavigate();
 
   const setFilter = (patch) => {
@@ -25,30 +24,22 @@ function CataloguePage() {
   };
 
   const filtered = useMemo(() => {
-    const list = allProducts();
     const query = q.trim().toLowerCase();
-    return list.filter((p) => {
+    return productCatalog.filter((p) => {
       const name = (p.name || '').toLowerCase();
-      const origin = (p.origin || '').toLowerCase();
-      const colors = (p.colors || []).join(' ').toLowerCase();
-      const short = (p.short || '').toLowerCase();
-      const matchQ =
-        !query ||
-        name.includes(query) ||
-        origin.includes(query) ||
-        colors.includes(query) ||
-        short.includes(query);
-      const matchSpace = !space || p.space === space;
-      const matchFinish = !finish || (p.finish || []).includes(finish);
-      return matchQ && matchSpace && matchFinish;
+      const code = (p.code || '').toLowerCase();
+      const categoryName = (p.category || '').toLowerCase();
+      const matchQ = !query || name.includes(query) || code.includes(query) || categoryName.includes(query);
+      const matchCategory = !category || p.category === category;
+      return matchQ && matchCategory;
     });
-  }, [q, space, finish]);
+  }, [q, category]);
 
   return (
     <>
       <Seo
         title="Product catalogue"
-        description="Search Niket Marble & Stone by space, finish, colour, and origin — flooring, cladding, kitchens, facades, and landscape."
+        description="Browse Niket Marble & Interior products by category, name, and product code."
         path="/catalogue"
       />
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
@@ -65,36 +56,21 @@ function CataloguePage() {
               type="search"
               value={q}
               onChange={(e) => setFilter({ q: e.target.value })}
-              placeholder="Name, colour, origin"
+              placeholder="Product name, code"
               className="border border-stone bg-paper px-3 py-2 text-sm normal-case tracking-normal outline-none focus:border-gold dark:border-white/15 dark:bg-black/40"
             />
           </label>
           <label className="flex flex-col gap-2 text-[11px] uppercase tracking-[0.18em]">
-            Space
+            Category
             <select
-              value={space}
-              onChange={(e) => setFilter({ space: e.target.value })}
+              value={category}
+              onChange={(e) => setFilter({ category: e.target.value })}
               className="border border-stone bg-paper px-3 py-2 text-sm normal-case tracking-normal outline-none focus:border-gold dark:border-white/15 dark:bg-black/40"
             >
-              <option value="">All spaces</option>
-              {spaces.map((s) => (
-                <option key={s.id} value={s.id}>
-                  {s.label}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="flex flex-col gap-2 text-[11px] uppercase tracking-[0.18em]">
-            Finish
-            <select
-              value={finish}
-              onChange={(e) => setFilter({ finish: e.target.value })}
-              className="border border-stone bg-paper px-3 py-2 text-sm normal-case tracking-normal outline-none focus:border-gold dark:border-white/15 dark:bg-black/40"
-            >
-              <option value="">All finishes</option>
-              {finishes.map((f) => (
-                <option key={f.id} value={f.id}>
-                  {f.label}
+              <option value="">All categories</option>
+              {productCategories.map((productCategory) => (
+                <option key={productCategory} value={productCategory}>
+                  {productCategory}
                 </option>
               ))}
             </select>

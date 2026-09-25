@@ -23,7 +23,7 @@ function AboutPage() {
       />
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         <p className="text-[11px] uppercase tracking-[0.3em] text-gold-deep dark:text-gold-light">Since {company.founded}</p>
-        <h1 className="mt-3 font-display text-5xl">About Niket Marble & Stone</h1>
+        <h1 className="mt-3 font-display text-5xl">About Niket Marble & Interior</h1>
         <div className="mt-10 grid gap-12 lg:grid-cols-2">
           <Reveal>
             <p className="text-lg leading-relaxed text-ink-soft dark:text-stone">
@@ -34,7 +34,7 @@ function AboutPage() {
             <p className="mt-4 leading-relaxed text-ink-soft dark:text-stone">
               Today we dress interiors and elevations for homes, hotels, and temples across India. Makrana
               remains our sacred specialty. Italian and Brazilian lots are imported for clients who need a
-              particular movement of vein. Exterior work is specified for sun, dust, and monsoon, not just
+              particular movement of vein. Marble facade work is specified for sun, dust, and monsoon, not just
               elevation renders.
             </p>
           </Reveal>

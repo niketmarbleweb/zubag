@@ -1,11 +1,11 @@
 export const SITE_URL = 'https://niketmarble.com';
 
 export const company = {
-  name: 'Niket Marble & Stone',
+  name: 'Niket Marble & Interior',
   shortName: 'Niket',
-  tagline: 'Timeless stone. Architectural precision.',
+  tagline: 'Timeless marble. Architectural precision.',
   description:
-    'Niket Marble & Stone is a Patna-based atelier supplying architectural marble, granite, and natural stone for interiors, facades, sacred spaces, and landscapes across India.',
+    'Niket Marble & Interior is a Patna-based atelier supplying architectural marble, granite, and natural stone for interiors, facades, sacred spaces, and landscapes across India.',
   founded: 1998,
   years: new Date().getFullYear() - 1998,
   phone: '+91 76448 06555',
@@ -13,7 +13,7 @@ export const company = {
   whatsapp: '917644806555',
   email: 'niketmarblepatna@gmail.com',
   emailHref: 'mailto:niketmarblepatna@gmail.com',
-  gstin: '08AABCN1234P1Z5',
+  gstin: '10BDIPK7801F1Z0',
   hours: 'Mon–Sat, 9:30 AM – 7:00 PM',
   address: {
     line1: 'Sawajpura More, near HDFC Bank',
@@ -37,9 +37,9 @@ export const company = {
 export const navLinks = [
   { to: '/', label: 'Home' },
   { to: '/interior', label: 'Interior' },
-  { to: '/exterior', label: 'Exterior' },
+  { to: '/exterior', label: 'Marble' },
   { to: '/catalogue', label: 'Catalogue' },
-  { to: '/about', label: 'About & FAQ' },
+  { to: '/about', label: 'About' },
   { to: '/contact', label: 'Contact' },
 ];
 
@@ -54,7 +54,7 @@ export const finishes = [
 
 export const spaces = [
   { id: 'interior', label: 'Interior' },
-  { id: 'exterior', label: 'Exterior' },
+  { id: 'exterior', label: 'Marble Facades' },
 ];
 
 export const categories = [
@@ -124,7 +124,7 @@ export const categories = [
   },
 ];
 
-export const products = [
+const originalProducts = [
   {
     slug: 'statuario-venato-slabs',
     name: 'Statuario Venato Slabs',
@@ -609,6 +609,23 @@ export const products = [
   },
 ];
 
+const validProductCategories = ['Interior', 'Exterior', 'Marble'];
+const marbleProductKeywords = ['MARBLE', 'ITALIAN', 'GRANITE', 'PEARL', 'ONYX', 'STONE', 'TRAVERTINE'];
+
+const normalizeProductCategory = (product) => {
+  if (validProductCategories.includes(product.category)) return product.category;
+  if (product.space === 'exterior') return 'Exterior';
+
+  const name = `${product.name || ''} ${product.description || ''} ${product.specs?.Material || ''}`.toUpperCase();
+  if (marbleProductKeywords.some((keyword) => name.includes(keyword))) return 'Marble';
+  return 'Interior';
+};
+
+export const products = originalProducts.map((product) => ({
+  ...product,
+  category: normalizeProductCategory(product),
+}));
+
 export const projects = {
   interior: [
     {
@@ -798,6 +815,20 @@ export const formatPrice = (n) =>
     maximumFractionDigits: 0,
   }).format(n);
 
+const normalizeImageUrl = (src, fallback = '/Image/Interior/PG12012-8.png') => {
+  if (!src) return fallback;
+  const cleaned = String(src).trim();
+  if (!cleaned) return fallback;
+  if (cleaned.startsWith('/Image/')) return encodeURI(cleaned);
+  if (cleaned.startsWith('data:')) return cleaned;
+  if (cleaned.startsWith('http')) {
+    return cleaned.includes('?') ? cleaned : `${cleaned}?auto=format&fit=crop&w=900&q=80`;
+  }
+  return cleaned || fallback;
+};
+
+export const resolveImageSrc = (src, fallback = '/Image/Interior/PG12012-8.png') => normalizeImageUrl(src, fallback);
+
 // Initialize fakeFastApi with the products declared above so products can be
 // edited in-browser and persisted to localStorage for future edits.
 import { fakeApi } from '../lib/fakeFastApi';
@@ -805,71 +836,140 @@ import { fakeApi } from '../lib/fakeFastApi';
 // Additional product names provided by the client (lightweight entries).
 const extraProductNames = [
   'White Marble',
-  'LAVA PG-089',
-  'PG 022',
-  'PG 284-1',
   'PEARL WHITE (PG-049)',
-  'DIAMOND CUT PG-105-1',
-  'DARK WOOD PG-924-3',
-  'Ready To Use Panel (1PAIR)',
-  '3D SHEET',
-  'PG-12012-2',
-  'PG-12012-12',
-  'PG-12012-3',
-  'PG 3005-1',
-  'PG 3005-2',
-  'PG 3108-5',
-  'PG 3108-6',
-  'PG 3108-7',
-  'PG 3108-8',
-  'PG 3108-10',
-  'PG 3108-1',
-  'PG 3108-2',
-  'PG 3108-4',
-  'PG 3108-9',
-  'PG6003',
-  'PG6001',
-  'PG6004',
-  'PG6002',
-  'PG6005',
-  'PG-12012-6',
   'RAIN FOREST GOLD PG-059',
   'ITALIAN WHITE PG-50',
-  'OPERA GREEN PG-046',
-  'OPERA ORANGE PG-086',
-  'OAK WOOD PG-922-4',
-  'DARK ILLUSION',
   'GREY AND WHITE GRANITE PG-85-1',
   'ITALIAN BLACK PG-067',
   'SANDEL MOUNTAIN PG-191-1',
   'PINK PEARL PG-40',
   'GOLD LINE WHITE PG-095-1',
-  'FONCE IMPERIAL PG-003',
-  'GREY PLAY PG-218-1',
   'LAVADIA BLACK PG-134',
   'SNOW MOUNTAIN PG-190-1',
-  'BAMMBOO VENER',
-  'BAMBOO VENER',
-  'PG 12012-8',
-  'PG 12012-7',
-  'PG 12012-10',
-  'PG 12012-9',
-  'PG 12012-15',
-  'PG 12012-14',
-  'PG 12012-5',
-  'PG 12012-1',
-  'PG 12012-4',
-  'PG 12012-11',
-  'PG 12012-13',
   'ORIENTAL WHITE',
   'PANDA WHITE',
-  'ROYAL BLUE TEXTURE',
   'GOLDEN CRYSTAL',
+  'OPERA GREEN PG-046',
+  'OPERA ORANGE PG-086',
+  'DARK WOOD PG-924-3',
+  'OAK WOOD PG-922-4',
+  'BAMBOO VENER',
+  'CHARCOAL',
   'GLOSSY WHITE',
   'OCEAN BLUE',
+  'ROYAL BLUE TEXTURE',
+  'FONCE IMPERIAL PG-003',
+  'GREY PLAY PG-218-1',
+  'DARK ILLUSION',
+  'LAVA PG-089',
+  'Ready To Use Panel (1PAIR)',
+  '3D SHEET',
+  'DIAMOND CUT PG-105-1',
+  'PG 022',
+  'PG 284-1',
+  'PG 3005-1',
+  'PG 3005-2',
+  'PG 3108-1',
+  'PG 3108-2',
+  'PG 3108-4',
+  'PG 3108-5',
+  'PG 3108-6',
+  'PG 3108-7',
+  'PG 3108-8',
+  'PG 3108-9',
+  'PG 3108-10',
   '3108-10',
-  'CHARCOAL',
+  'PG6001',
+  'PG6002',
+  'PG6003',
+  'PG6004',
+  'PG6005',
+  'PG-12012-1',
+  'PG-12012-2',
+  'PG-12012-3',
+  'PG-12012-4',
+  'PG-12012-5',
+  'PG-12012-6',
+  'PG-12012-7',
+  'PG-12012-8',
+  'PG-12012-9',
+  'PG-12012-10',
+  'PG-12012-11',
+  'PG-12012-12',
+  'PG-12012-13',
+  'PG-12012-14',
+  'PG-12012-15',
 ];
+
+const productImageMap = {
+  whitemarble: '/Image/Marble/white-marble.jpg',
+  pearlwhitepg049: '/Image/Marble/PEARL-WHITEl.jpg',
+  rainforestgoldpg059: '/Image/Marble/RAIN-FOREST-GOLD-PG-059.jpg',
+  italianwhitepg50: '/Image/Marble/white-marble.jpg',
+  greyandwhitegranitepg851: '/Image/Marble/PG-022.jpg',
+  italianblackpg067: '/Image/Marble/PG-3108-2.jpg',
+  sandelmountainpg1911: '/Image/Interior/SANDELMOUNTAINPG-191-1.png',
+  pinkpearlpg40: '/Image/Interior/PINKPEARLPG-40.png',
+  goldlinewhitepg0951: '/Image/Marble/PG-022.jpg',
+  lavadiablackpg134: '/Image/Marble/PG-3108-10.jpg',
+  snowmountainpg1901: '/Image/Interior/SNOWMOUNTAINPG-190-1.png',
+  orientalwhite: '/Image/Interior/ORIENTALWHITE.png',
+  pandawhite: '/Image/Interior/PANDAWHITE.png',
+  goldencrystal: '/Image/Marble/PG-022.jpg',
+  operagreenpg046: '/Image/Marble/PG-022.jpg',
+  operaorangepg086: '/Image/Marble/PG-022.jpg',
+  darkwoodpg9243: '/Image/Marble/DARK-WOOD-PG-924-3.jpg',
+  oakwoodpg9224: '/Image/Marble/DARK-WOOD-PG-924-3.jpg',
+  bambboovener: '/Image/Marble/DARK-WOOD-PG-924-3.jpg',
+  bamboovener: '/Image/Marble/DARK-WOOD-PG-924-3.jpg',
+  charcoal: '/Image/Marble/PG-3108-8.jpg',
+  glossywhite: '/Image/Marble/white-marble.jpg',
+  oceanblue: '/Image/Interior/ROYALBLUETEXTURE.png',
+  royalbluetexture: '/Image/Interior/ROYALBLUETEXTURE.png',
+  onceimperialpg003: '/Image/Marble/PG-284-1.jpg',
+  fonceimperialpg003: '/Image/Marble/PG-284-1.jpg',
+  greyplaypg2181: '/Image/Marble/PG-022.jpg',
+  darkillusion: '/Image/Marble/PG-3108-8.jpg',
+  lavapg089: '/Image/Marble/LAVA PG-089.jpg',
+  readytousepanel1pair: '/Image/Marble/Ready-To-Use-Panel.jpg',
+  '3dsheet': '/Image/Marble/SHEET.jpg',
+  diamondcutpg1051: '/Image/Marble/DIAMOND-CUT-PG-105-1.jpg',
+  pg022: '/Image/Marble/PG-022.jpg',
+  pg2841: '/Image/Marble/PG-284-1.jpg',
+  pg30051: '/Image/Marble/PG-022.jpg',
+  pg30052: '/Image/Marble/PG-022.jpg',
+  pg31081: '/Image/Marble/PG-3108-1.jpg',
+  pg31082: '/Image/Marble/PG-3108-2.jpg',
+  pg31084: '/Image/Marble/PG-3108-4.jpg',
+  pg31085: '/Image/Marble/PG-3108-4.jpg',
+  pg31086: '/Image/Marble/PG-3108-6.jpg',
+  pg31087: '/Image/Marble/PG-3108-7..jpg',
+  pg31088: '/Image/Marble/PG-3108-8.jpg',
+  pg31089: '/Image/Marble/PG-3108-8.jpg',
+  pg310810: '/Image/Marble/PG-3108-10.jpg',
+  pg310810duplicate: '/Image/Marble/PG-3108-10.jpg',
+  pg6001: '/Image/Marble/PG-022.jpg',
+  pg6002: '/Image/Marble/PG-022.jpg',
+  pg6003: '/Image/Marble/PG6003.jpg',
+  pg6004: '/Image/Marble/PG-022.jpg',
+  pg6005: '/Image/Marble/PG-022.jpg',
+  pg120121: '/Image/Interior/PG12012-1.png',
+  pg120122: '/Image/Marble/PG-12012-2.jpg',
+  pg120123: '/Image/Interior/PG12012-4.png',
+  pg120124: '/Image/Interior/PG12012-4.png',
+  pg120125: '/Image/Interior/PG12012-5.png',
+  pg120126: '/Image/Marble/PG-12012-6.jpg',
+  pg120127: '/Image/Interior/PG12012-7.png',
+  pg120128: '/Image/Interior/PG12012-8.png',
+  pg120129: '/Image/Interior/PG12012-9.png',
+  pg1201210: '/Image/Interior/PG12012-10.png',
+  pg1201211: '/Image/Interior/PG12012-11.png',
+  pg1201212: '/Image/Marble/PG-12012-12.jpg',
+  pg1201213: '/Image/Interior/PG12012-13.png',
+  pg1201214: '/Image/Interior/PG12012-14.png',
+  pg1201215: '/Image/Interior/PG12012-15.png',
+  '310810': '/Image/Marble/PG-3108-10.jpg',
+};
 
 function _slugify(name) {
   return name
@@ -880,12 +980,64 @@ function _slugify(name) {
     .replace(/^-|-$/g, '');
 }
 
+function sanitizeProductImages(product) {
+  if (!product || !Array.isArray(product.images)) {
+    return product;
+  }
+
+  return {
+    ...product,
+    images: product.images.map((src) => normalizeImageUrl(src)),
+  };
+}
+
+function _normalizeName(name) {
+  return name
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '')
+    .replace(/(pg|pge)/g, 'pg');
+}
+
+function resolveProductImage(name) {
+  const normalized = _normalizeName(name);
+
+  if (productImageMap[normalized]) {
+    return productImageMap[normalized];
+  }
+
+  const directMatch = Object.entries(productImageMap).find(([key, value]) => normalized.includes(key) || key.includes(normalized));
+  if (directMatch) {
+    return directMatch[1];
+  }
+
+  const marbleFallbacks = [
+    '/Image/Marble/white-marble.jpg',
+    '/Image/Marble/PG-022.jpg',
+    '/Image/Marble/PG-3108-8.jpg',
+    '/Image/Marble/RAIN-FOREST-GOLD-PG-059.jpg',
+  ];
+  const interiorFallbacks = [
+    '/Image/Interior/ORIENTALWHITE.png',
+    '/Image/Interior/ROYALBLUETEXTURE.png',
+    '/Image/Interior/PINKPEARLPG-40.png',
+    '/Image/Interior/PG12012-8.png',
+  ];
+
+  if (/white|gold|black|granite|marble|stone|pearl|forest|sand|snow|pink|lava|opera|diamond|sheet|ready|panel|panel/i.test(name)) {
+    return marbleFallbacks.find((src) => src) || '/Image/Marble/white-marble.jpg';
+  }
+
+  return interiorFallbacks.find((src) => src) || '/Image/Interior/PG12012-8.png';
+}
+
 function makeExtra(name) {
   const slug = _slugify(name);
+  const isMarbleStone = /marble|stone|granite|white|black|gold|pearl|rain|forest|sand|snow|pink|lava|opera|italian|oriental|panda|diamond|sheet|panel|ready/i.test(name);
   return {
     slug,
     name,
-    category: 'panels',
+    category: isMarbleStone ? 'marble' : 'panels',
     space: 'interior',
     finish: ['polished'],
     origin: 'Patna showroom',
@@ -899,13 +1051,13 @@ function makeExtra(name) {
     description:
       'This product is available in our Patna showroom and can be quoted for your kitchen, wall, wardrobe, or feature panel requirement. Please confirm finish, shade, and size before final purchase.',
     specs: {
-      Material: 'Decorative panel',
+      Material: isMarbleStone ? 'Natural marble / stone' : 'Decorative panel',
       Finish: 'Polished',
       Thickness: '18 mm',
       Application: 'Interior panels, walls, wardrobes',
       Availability: 'Ready to quote',
     },
-    images: ['https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1600&q=80'],
+    images: [resolveProductImage(name)],
   };
 }
 
@@ -913,17 +1065,18 @@ function makeExtra(name) {
 // contents with static products plus any extra ones defined above.
 try {
   const extras = extraProductNames.map(makeExtra);
-  // avoid dupes by slug
-  const existingSlugs = new Set(products.map((p) => p.slug));
-  const toAdd = extras.filter((e) => !existingSlugs.has(e.slug));
-  // Initialize - if localStorage already has items, fakeApi.init will keep them.
-  fakeApi.init(products);
-  // Merge in any missing extras even if localStorage existed previously.
+  const sanitizedProducts = products.map(sanitizeProductImages);
+  const sanitizedExtras = extras.map(sanitizeProductImages);
+  const existingSlugs = new Set(sanitizedProducts.map((p) => p.slug));
+  const toAdd = sanitizedExtras.filter((e) => !existingSlugs.has(e.slug));
+
+  fakeApi.init(sanitizedProducts.concat(toAdd));
+
   try {
-    const current = fakeApi.list();
+    const current = fakeApi.list().map(sanitizeProductImages);
     const currentSlugs = new Set(current.map((p) => p.slug));
-    const missing = extras.filter((e) => !currentSlugs.has(e.slug));
-    if (missing.length > 0) {
+    const missing = sanitizedExtras.filter((e) => !currentSlugs.has(e.slug));
+    if (missing.length > 0 || current.some((p) => p.images.some((src) => src && src.includes(' ')))) {
       fakeApi.replaceAll(current.concat(missing));
     }
   } catch (e2) {
@@ -933,17 +1086,24 @@ try {
   // ignore if running server-side or if localStorage is unavailable
 }
 
-export const getProduct = (slug) => fakeApi.get(slug);
+export const getProduct = (slug) => {
+  const product = fakeApi.get(slug);
+  return product ? { ...product, category: normalizeProductCategory(product) } : product;
+};
 
 export const relatedProducts = (product, limit = 3) =>
   fakeApi
     .list()
-    .filter((p) => p.slug !== product.slug && (p.category === product.category || p.space === product.space))
+    .map((item) => ({ ...item, category: normalizeProductCategory(item) }))
+    .filter((item) => item.slug !== product.slug && item.category === normalizeProductCategory(product))
     .slice(0, limit);
 
-export const productsBySpace = (space) => fakeApi.list().filter((p) => p.space === space);
+export const productsBySpace = (space) => fakeApi.list()
+  .filter((product) => product.space === space)
+  .map((product) => ({ ...product, category: normalizeProductCategory(product) }));
 
-export const allProducts = () => fakeApi.list();
+export const allProducts = () => fakeApi.list()
+  .map((product) => ({ ...product, category: normalizeProductCategory(product) }));
 
 export const categoriesBySpace = (space) => categories.filter((c) => c.space === space);
 

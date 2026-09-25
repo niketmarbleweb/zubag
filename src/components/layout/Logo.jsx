@@ -2,10 +2,10 @@ import { Link } from '@tanstack/react-router';
 
 export default function Logo({ className = '' }) {
   return (
-    <Link to="/" className={`group flex items-center gap-3 ${className}`} aria-label="Niket Marble & Stone home">
+    <Link to="/" className={`group flex items-center gap-3 ${className}`} aria-label="Niket Marble & Interior home">
       <img
         src="/niket-marble-logo.jpeg"
-        alt="Niket Marble & Stone logo"
+        alt="Niket Marble & Interior logo"
         className="h-10 w-10 rounded-md object-cover ring-1 ring-gold/50"
       />
       <span className="flex flex-col">
@@ -13,7 +13,7 @@ export default function Logo({ className = '' }) {
           Niket
         </span>
         <span className="mt-0.5 text-[10px] uppercase tracking-[0.28em] text-gold-deep dark:text-gold-light">
-          Marble & Stone
+          Marble & Interior
         </span>
       </span>
     </Link>

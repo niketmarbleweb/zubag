@@ -16,6 +16,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ExteriorRouteImport } from './routes/exterior'
 import { Route as InteriorRouteImport } from './routes/interior'
 import { Route as ProductsRouteImport } from './routes/products'
+import { Route as ProductIdRouteImport } from './routes/product.$id'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -53,6 +54,11 @@ const ProductsRoute = ProductsRouteImport.update({
   path: '/products',
   getParentRoute: () => rootRouteImport,
 })
+const ProductIdRoute = ProductIdRouteImport.update({
+  id: '/product/$id',
+  path: '/product/$id',
+  getParentRoute: () => rootRouteImport,
+})
 const ProductsSlugRoute = ProductsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -75,5 +81,6 @@ const rootRouteChildren = {
   ExteriorRoute: ExteriorRoute,
   InteriorRoute: InteriorRoute,
   ProductsRoute: ProductsRouteWithChildren,
+  ProductIdRoute: ProductIdRoute,
 }
 export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)

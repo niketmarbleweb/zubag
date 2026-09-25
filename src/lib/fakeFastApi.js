@@ -3,6 +3,30 @@
 
 const STORAGE_KEY = 'fakefast_products_v1';
 
+const normalizeImageUrl = (src) => {
+  if (!src || typeof src !== 'string') return '';
+  const cleaned = src.trim();
+  if (!cleaned) return '';
+  if (cleaned.startsWith('/Image/')) return encodeURI(cleaned);
+  if (cleaned.startsWith('data:')) return cleaned;
+  if (cleaned.startsWith('http')) {
+    return cleaned.includes('?') ? cleaned : `${cleaned}?auto=format&fit=crop&w=900&q=80`;
+  }
+  return cleaned;
+};
+
+const sanitizeProducts = (items) => {
+  if (!Array.isArray(items)) return [];
+  return items.map((product) => {
+    if (!product || typeof product !== 'object') return product;
+    const images = Array.isArray(product.images) ? product.images.map(normalizeImageUrl).filter(Boolean) : [];
+    return {
+      ...product,
+      images,
+    };
+  });
+};
+
 class FakeFastApi {
   constructor() {
     this._initialized = false;
@@ -11,18 +35,23 @@ class FakeFastApi {
 
   init(defaultItems = []) {
     if (this._initialized) return;
-    // Attempt to load from localStorage first
     try {
       const raw = globalThis.localStorage && localStorage.getItem(STORAGE_KEY);
+      const defaults = sanitizeProducts(defaultItems);
       if (raw) {
-        this._items = JSON.parse(raw);
+        const parsed = JSON.parse(raw);
+        this._items = sanitizeProducts(parsed);
+        const hasBrokenImages = this._items.some((product) => !Array.isArray(product.images) || product.images.length === 0);
+        if (hasBrokenImages || this._items.length === 0) {
+          this._items = defaults;
+          this._save();
+        }
       } else {
-        this._items = JSON.parse(JSON.stringify(defaultItems));
+        this._items = defaults;
         this._save();
       }
     } catch (e) {
-      // Fallback to defaults if anything goes wrong
-      this._items = JSON.parse(JSON.stringify(defaultItems));
+      this._items = sanitizeProducts(defaultItems);
     }
     this._initialized = true;
   }
@@ -44,7 +73,7 @@ class FakeFastApi {
   }
 
   replaceAll(items) {
-    this._items = JSON.parse(JSON.stringify(items));
+    this._items = sanitizeProducts(items);
     this._save();
   }
 

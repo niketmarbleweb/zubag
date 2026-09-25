@@ -18,7 +18,7 @@ export default function AboutTeaser() {
           <p className="text-[11px] uppercase tracking-[0.3em] text-gold-deep dark:text-gold-light">The atelier</p>
           <h2 className="mt-3 font-display text-4xl sm:text-5xl">Craftsmanship from quarry to courtyard</h2>
           <p className="mt-5 text-sm leading-relaxed text-ink-soft dark:text-stone">
-            For {company.years} years, Niket Marble & Stone has selected, fabricated, and installed natural
+            For {company.years} years, Niket Marble & Interior has selected, fabricated, and installed natural
             stone for residences, hotels, and sacred spaces. We work as a quiet partner to architects —
             matching lots, photographing slabs, and speaking the language of thickness, sealer, and joint.
           </p>

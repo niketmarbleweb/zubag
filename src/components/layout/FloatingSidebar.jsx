@@ -6,7 +6,7 @@ const items = [
   {
     id: 'whatsapp',
     label: 'WhatsApp',
-    href: whatsappLink('Hello Niket Marble & Stone, I would like to discuss a project.'),
+    href: whatsappLink('Hello Niket Marble & Interior, I would like to discuss a project.'),
     icon: MessageCircle,
   },
   { id: 'call', label: 'Call', href: company.phoneHref, icon: Phone },

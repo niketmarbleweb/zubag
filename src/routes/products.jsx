@@ -1,17 +1,19 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import Seo from '../components/seo/Seo';
-import { allProducts } from '../data/siteData';
+import ProductCard from '../components/product/ProductCard';
+import { productCatalog, productCategories } from '../data/productCatalog';
 
 export const Route = createFileRoute('/products')({
+  validateSearch: (search) => ({
+    category: productCategories.includes(search.category) ? search.category : '',
+  }),
   component: ProductsPage,
 });
 
 function ProductsPage() {
-  const products = allProducts().map((p) => ({
-    name: p.name,
-    slug: p.slug,
-    image: p.images && p.images[0] ? p.images[0] : 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80',
-  }));
+  const { category } = Route.useSearch();
+  const navigate = Route.useNavigate();
+  const products = productCatalog.filter((product) => !category || product.category === category);
 
   return (
     <>
@@ -19,38 +21,37 @@ function ProductsPage() {
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         <p className="text-[11px] uppercase tracking-[0.3em] text-gold-deep dark:text-gold-light">Catalogue</p>
         <h1 className="mt-3 font-display text-4xl">Products</h1>
-        <p className="mt-2 text-sm text-ink-soft dark:text-stone">Select a product to view details or request a quote.</p>
+        <p className="mt-2 text-sm text-ink-soft dark:text-stone">Browse all products by category.</p>
 
-        <div className="mt-8 grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-          {products.map((p) => (
-            <article
-              key={`${p.slug}-${p.name}`}
-              className="overflow-hidden rounded-lg border border-stone bg-white shadow-sm transition-transform hover:scale-[1.01] dark:bg-trueGray-800"
-            >
-              <div className="aspect-[4/3] w-full overflow-hidden">
-                <img src={p.image} alt={p.name} className="h-full w-full object-cover" />
-              </div>
-              <div className="p-4">
-                <h3 className="font-display text-lg">{p.name}</h3>
-                <p className="mt-2 text-sm text-ink-soft dark:text-stone">Code: {p.slug}</p>
-                <div className="mt-4 flex items-center justify-between gap-3">
-                  <a
-                    href={`/products/${p.slug}`}
-                    className="inline-block rounded-md bg-gold-deep px-3 py-2 text-sm font-medium text-white hover:bg-gold-600"
-                  >
-                    View details
-                  </a>
-                  <button
-                    className="text-sm text-ink-soft hover:text-ink"
-                    onClick={() => window.open('/contact?quote=1', '_self')}
-                  >
-                    Request quote
-                  </button>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
+        <label className="mt-6 flex max-w-xs flex-col gap-2 text-[11px] uppercase tracking-[0.18em]">
+          Category
+          <select
+            value={category}
+            onChange={(event) => navigate({ search: { category: event.target.value }, replace: true })}
+            className="border border-stone bg-paper px-3 py-2 text-sm normal-case tracking-normal outline-none focus:border-gold dark:border-white/15 dark:bg-black/40"
+          >
+            <option value="">All categories</option>
+            {productCategories.map((item) => <option key={item} value={item}>{item}</option>)}
+          </select>
+        </label>
+
+        {products.length === 0 ? (
+          <div className="mt-10 rounded-xl border border-dashed border-stone bg-white p-8 text-center dark:border-white/10 dark:bg-white/5">
+            <p className="font-display text-2xl">No product images found</p>
+            <p className="mt-3 text-sm text-ink-soft dark:text-stone">
+              Add product images under public/Image/Interiorandmarble, public/Image/Interior, or public/Image/Marble to populate the catalogue.
+            </p>
+            <Link to="/" className="mt-5 inline-block border border-gold px-5 py-3 text-[11px] uppercase tracking-[0.2em]">
+              Return Home
+            </Link>
+          </div>
+        ) : (
+          <div className="mt-8 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
       </section>
     </>
   );
