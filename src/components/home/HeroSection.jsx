@@ -6,7 +6,7 @@ export default function HeroSection() {
     <section className="relative isolate min-h-[88vh] overflow-hidden text-white">
       <img
         src={hero.image}
-        alt="Architectural marble interior with sculpted stone walls and floors"
+        alt="Architectural tile interior with sculpted stone walls and floors"
         className="hero-pan absolute inset-0 h-full w-full object-cover"
         fetchPriority="high"
       />

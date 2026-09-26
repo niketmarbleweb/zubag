@@ -1,6 +1,6 @@
-# Niket Marble & Interior
+# Niket Tiles & Interior
 
-A luxury, mobile-first website for an architectural marble and stone atelier based in Kishangarh, Rajasthan.
+A luxury, mobile-first website for an architectural tile and stone atelier based in Kishangarh, Rajasthan. 
 
 ## Stack
 

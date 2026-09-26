@@ -58,7 +58,7 @@ function ContactPage() {
             </address>
             <div className="mt-8 aspect-[16/10] overflow-hidden border border-stone dark:border-white/10">
               <iframe
-                title="Map of Niket Marble & Interior, Patna"
+                title="Map of Niket Tiles & Interior, Patna"
                 src={company.mapEmbed}
                 className="h-full w-full"
                 loading="lazy"

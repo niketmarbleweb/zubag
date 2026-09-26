@@ -35,14 +35,14 @@ html.dark body {
   font-family: var(--font-display);
 }
 
-.marble-bg {
+.tile-bg {
   background-color: var(--color-paper);
   background-image:
     radial-gradient(ellipse at 20% 0%, rgba(196, 163, 90, 0.08), transparent 50%),
     radial-gradient(ellipse at 80% 100%, rgba(28, 25, 23, 0.04), transparent 45%);
 }
 
-.dark .marble-bg {
+.dark .tile-bg {
   background-color: #0c0b0a;
   background-image:
     radial-gradient(ellipse at 20% 0%, rgba(196, 163, 90, 0.12), transparent 50%),

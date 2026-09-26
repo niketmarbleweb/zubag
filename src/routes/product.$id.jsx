@@ -77,6 +77,7 @@ function ProductDetails() {
               {product.category}
             </span>
             <h1 className="mt-3 font-display text-5xl">{product.name}</h1>
+            <p className="mt-2 text-sm uppercase tracking-[0.16em] text-ink-soft dark:text-stone">{product.subCategory || product.category}</p>
             <p className="mt-4 text-sm uppercase tracking-[0.2em] text-ink-soft dark:text-stone">Product Code: {product.code}</p>
             <p className="mt-6 text-lg leading-relaxed text-ink-soft dark:text-stone">{product.description}</p>
 

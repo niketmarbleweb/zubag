@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from '@tanstack/react-router';
-import { Facebook, Instagram, Youtube } from 'lucide-react';
+import { Download, Facebook, Instagram, Youtube } from 'lucide-react';
 import { company, navLinks } from '../../data/siteData';
 import Logo from './Logo';
 import Button from '../ui/Button';
@@ -59,6 +59,10 @@ export default function Footer() {
           <p className="mt-4 text-sm text-ink-soft dark:text-stone">
             Slab releases, finish studies, and project stories.
           </p>
+          <Button href="/brochure.pdf" download="Brochure.pdf" className="mt-4 w-full sm:w-auto">
+            <Download size={16} aria-hidden="true" />
+            Download product brochure
+          </Button>
           <form onSubmit={onSubmit} className="mt-4 flex flex-col gap-3">
             <label className="sr-only" htmlFor="newsletter-email">
               Email

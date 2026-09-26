@@ -1,11 +1,11 @@
 export const SITE_URL = 'https://niketmarble.com';
 
 export const company = {
-  name: 'Niket Marble & Interior',
+  name: 'Niket Tiles & Interior',
   shortName: 'Niket',
-  tagline: 'Timeless marble. Architectural precision.',
+  tagline: 'Timeless tiles. Architectural precision.',
   description:
-    'Niket Marble & Interior is a Patna-based atelier supplying architectural marble, granite, and natural stone for interiors, facades, sacred spaces, and landscapes across India.',
+    'Niket Tiles & Interior is a Patna-based atelier supplying architectural tiles, granite, and natural stone for interiors, facades, sacred spaces, and landscapes across India.',
   founded: 1998,
   years: new Date().getFullYear() - 1998,
   phone: '+91 76448 06555',
@@ -37,7 +37,7 @@ export const company = {
 export const navLinks = [
   { to: '/', label: 'Home' },
   { to: '/interior', label: 'Interior' },
-  { to: '/exterior', label: 'Marble' },
+  { to: '/marble', label: 'Tiles' },
   { to: '/catalogue', label: 'Catalogue' },
   { to: '/about', label: 'About' },
   { to: '/contact', label: 'Contact' },
@@ -54,13 +54,13 @@ export const finishes = [
 
 export const spaces = [
   { id: 'interior', label: 'Interior' },
-  { id: 'exterior', label: 'Marble Facades' },
+  { id: 'exterior', label: 'Tile Facades' },
 ];
 
 export const categories = [
   {
     id: 'flooring',
-    name: 'Marble Flooring',
+    name: 'Tile Flooring',
     space: 'interior',
     description: 'Grand slabs and tiles for halls, suites, and galleries.',
     image:
@@ -86,7 +86,7 @@ export const categories = [
     id: 'mandirs',
     name: 'Mandirs & Sacred Stone',
     space: 'interior',
-    description: 'Makrana and Italian white marble for puja rooms and temples.',
+    description: 'Makrana and Italian white tiles for puja rooms and temples.',
     image:
       'https://images.unsplash.com/photo-1582510003544-4d00b7f74232?auto=format&fit=crop&w=1400&q=80',
   },
@@ -94,7 +94,7 @@ export const categories = [
     id: 'facades',
     name: 'Facades & Elevation',
     space: 'exterior',
-    description: 'Weathered sandstone, granite, and marble rain-screens.',
+    description: 'Weathered sandstone, granite, and tile rain-screens.',
     image:
       'https://images.unsplash.com/photo-1487956382158-bb926046304a?auto=format&fit=crop&w=1400&q=80',
   },
@@ -143,7 +143,7 @@ const originalProducts = [
     description:
       'Selected from limited Carrara lots, our Statuario Venato slabs are book-matched for palatial floors, lobby walls, and suite bathrooms. Each crate is inspected in Patna for colour harmony, resin fill quality, and structural integrity.',
     specs: {
-      Material: 'Natural marble',
+      Material: 'Natural tile',
       Absorption: '< 0.15%',
       Finish: 'Polished / Honed',
       SlabSize: 'Up to 3200 × 1800 mm',
@@ -170,11 +170,11 @@ const originalProducts = [
     featured: true,
     badge: 'Heritage',
     short:
-      'The marble of the Taj — luminous Makrana white for mandirs, jaalis, and inlay floors.',
+      'The stone of the Taj — luminous Makrana white for mandirs, jaalis, and inlay floors.',
     description:
       'Quarried from the same geological belt that built the Taj Mahal, our Makrana Premium lots are selected for low iron, high translucency, and fine grain. Ideal for carved mandirs, temple cladding, and sacred floors that must remain cool and luminous.',
     specs: {
-      Material: 'Makrana marble',
+      Material: 'Makrana tile',
       Absorption: 'Low',
       Finish: 'Polished / Honed',
       SlabSize: 'Cut-to-size & carved',
@@ -200,11 +200,11 @@ const originalProducts = [
     unit: 'sq.ft',
     featured: true,
     badge: 'Dramatic',
-    short: 'Inky Spanish marble with crisp white rivers — for galleries and dining rooms.',
+    short: 'Inky Spanish stone with crisp white rivers — for galleries and dining rooms.',
     description:
       'Black Marquina delivers high-contrast drama under chandelier light. We supply calibrated tiles and full slabs with epoxy-stabilised veins for luxury residences, boutique hotels, and retail flagships.',
     specs: {
-      Material: 'Natural marble',
+      Material: 'Natural tile',
       Absorption: 'Low–medium',
       Finish: 'High polish',
       SlabSize: 'Up to 2800 × 1600 mm',
@@ -218,8 +218,8 @@ const originalProducts = [
     ],
   },
   {
-    slug: 'indian-green-marble',
-    name: 'Indian Green Marble',
+    slug: 'indian-green-tiles',
+    name: 'Indian Green Tiles',
     category: 'cladding',
     space: 'interior',
     finish: ['polished', 'honed'],
@@ -234,7 +234,7 @@ const originalProducts = [
     description:
       'A classic Indian export stone, selected for consistent green ground and metallic gold movement. Excellent for statement walls, tabletops, and elevator lobbies when sealed correctly.',
     specs: {
-      Material: 'Natural marble',
+      Material: 'Natural tile',
       Absorption: 'Medium',
       Finish: 'Polished / Honed',
       SlabSize: '2400 × 1400 mm typical',
@@ -324,7 +324,7 @@ const originalProducts = [
     description:
       'Limited Calacatta Gold lots reserved for vanity tops and book-matched bath walls. We photograph every slab pair before fabrication so designers can lock composition.',
     specs: {
-      Material: 'Natural marble',
+      Material: 'Natural tile',
       Absorption: 'Low',
       Finish: 'Mirror polish',
       SlabSize: 'Select lots',
@@ -368,8 +368,8 @@ const originalProducts = [
     ],
   },
   {
-    slug: 'spiral-marble-staircase',
-    name: 'Monolithic Marble Staircase',
+    slug: 'spiral-tiles-staircase',
+    name: 'Monolithic Tile Staircase',
     category: 'staircases',
     space: 'interior',
     finish: ['polished', 'honed'],
@@ -384,7 +384,7 @@ const originalProducts = [
     description:
       'Bespoke stair packages with CNC-cut treads, matched risers, and optional brass inlays. Site templates are taken before fabrication to guarantee a silent, precise fit.',
     specs: {
-      Material: 'Marble composite package',
+      Material: 'Tile composite package',
       Absorption: 'Low',
       Finish: 'Polished / Honed',
       SlabSize: 'Project-specific',
@@ -590,7 +590,7 @@ const originalProducts = [
     unit: 'sq.ft',
     featured: true,
     badge: 'Performance',
-    short: 'Marble look, granite toughness — leathered quartzite for islands.',
+    short: 'Tile look, granite toughness — leathered quartzite for islands.',
     description:
       'Brazilian Taj Mahal quartzite offers Calacatta movement with far higher scratch and etch resistance. Leathered finish is our most requested island specification for family kitchens.',
     specs: {
@@ -609,15 +609,15 @@ const originalProducts = [
   },
 ];
 
-const validProductCategories = ['Interior', 'Exterior', 'Marble'];
-const marbleProductKeywords = ['MARBLE', 'ITALIAN', 'GRANITE', 'PEARL', 'ONYX', 'STONE', 'TRAVERTINE'];
+const validProductCategories = ['Interior', 'Exterior', 'Tiles'];
+const tileProductKeywords = ['MARBLE', 'ITALIAN', 'GRANITE', 'PEARL', 'ONYX', 'STONE', 'TRAVERTINE'];
 
 const normalizeProductCategory = (product) => {
   if (validProductCategories.includes(product.category)) return product.category;
   if (product.space === 'exterior') return 'Exterior';
 
   const name = `${product.name || ''} ${product.description || ''} ${product.specs?.Material || ''}`.toUpperCase();
-  if (marbleProductKeywords.some((keyword) => name.includes(keyword))) return 'Marble';
+  if (tileProductKeywords.some((keyword) => name.includes(keyword))) return 'Tiles';
   return 'Interior';
 };
 
@@ -647,7 +647,7 @@ export const projects = {
       location: 'Gurugram',
       image:
         'https://images.unsplash.com/photo-1600585154340-0ef3c08c08be?auto=format&fit=crop&w=1200&q=80',
-      note: 'Black Marquina gallery and spiral marble stair.',
+      note: 'Black Marquina gallery and spiral tile stair.',
     },
     {
       title: 'Heritage Haveli Suite',
@@ -715,7 +715,7 @@ export const testimonials = [
     name: 'Muskan Kumari',
     role: 'Homeowner, Patna',
     quote:
-      'This is top marble shops in Patna, praised for offering high-quality, durable materials, excellent customer service, and competitive pricing. Customers often highlight the vast collections, professional staff, and reliable delivery, making them top choices for home improvement. One of the best shop for home interior designing.',
+      'This is among Patna’s top tile shops, praised for quality materials, excellent customer service, and competitive pricing. Customers often highlight the broad collections, professional staff, and reliable delivery. One of the best shops for home interior designing.',
     rating: 5,
   },
   {
@@ -776,7 +776,7 @@ export const whyChoose = [
 
 export const faqs = [
   {
-    q: 'Do you supply both Indian and imported marble?',
+    q: 'Do you supply both Indian and imported tiles?',
     a: 'Yes. We stock Makrana, Udaipur greens, Kota, Dholpur, and Jaisalmer alongside Italian Statuario, Calacatta, Spanish Marquina, and selected Brazilian quartzites.',
   },
   {
@@ -785,15 +785,15 @@ export const faqs = [
   },
   {
     q: 'What thickness should I specify?',
-    a: 'Interior floors are typically 18–20 mm. Worktops are 20 or 30 mm. Facades and stairs often need 30–40 mm. We confirm after reviewing spans and fixing methods.',
+    a: 'Interior tile floors are typically 18–20 mm. Worktops are 20 or 30 mm. Facades and stairs often need 30–40 mm. We confirm after reviewing spans and fixing methods.',
   },
   {
     q: 'Do you fabricate kitchens and mandirs?',
     a: 'Yes. Our Patna workshop handles cut-outs, edge profiles, book-matching, jaalis, and carved mandirs. Site templates are taken for complex pieces.',
   },
   {
-    q: 'How should marble be maintained in Indian kitchens?',
-    a: 'Use a pH-neutral stone cleaner, wipe acids immediately, and reseal annually. For heavy cooking we often recommend granite or quartzite on the island and marble on quieter surfaces.',
+    q: 'How should tiles be maintained in Indian kitchens?',
+    a: 'Use a pH-neutral stone cleaner and wipe spills promptly. For heavy cooking we often recommend granite or quartzite on the island and tiles on quieter surfaces.',
   },
   {
     q: 'Do you deliver outside Rajasthan?',
@@ -803,7 +803,7 @@ export const faqs = [
 
 export const hero = {
   headline: 'Stone that holds the light.',
-  sub: 'Architectural marble, granite, and landscape stone — selected in Patna, installed across India.',
+  sub: 'Architectural tiles, granite, and landscape stone — selected in Patna, installed across India.',
   image:
     'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=80',
 };
@@ -835,7 +835,7 @@ import { fakeApi } from '../lib/fakeFastApi';
 
 // Additional product names provided by the client (lightweight entries).
 const extraProductNames = [
-  'White Marble',
+  'White Tiles',
   'PEARL WHITE (PG-049)',
   'RAIN FOREST GOLD PG-059',
   'ITALIAN WHITE PG-50',
@@ -1011,7 +1011,7 @@ function resolveProductImage(name) {
     return directMatch[1];
   }
 
-  const marbleFallbacks = [
+  const tileFallbacks = [
     '/Image/Marble/white-marble.jpg',
     '/Image/Marble/PG-022.jpg',
     '/Image/Marble/PG-3108-8.jpg',
@@ -1025,7 +1025,7 @@ function resolveProductImage(name) {
   ];
 
   if (/white|gold|black|granite|marble|stone|pearl|forest|sand|snow|pink|lava|opera|diamond|sheet|ready|panel|panel/i.test(name)) {
-    return marbleFallbacks.find((src) => src) || '/Image/Marble/white-marble.jpg';
+    return tileFallbacks.find((src) => src) || '/Image/Marble/white-marble.jpg';
   }
 
   return interiorFallbacks.find((src) => src) || '/Image/Interior/PG12012-8.png';
@@ -1033,11 +1033,11 @@ function resolveProductImage(name) {
 
 function makeExtra(name) {
   const slug = _slugify(name);
-  const isMarbleStone = /marble|stone|granite|white|black|gold|pearl|rain|forest|sand|snow|pink|lava|opera|italian|oriental|panda|diamond|sheet|panel|ready/i.test(name);
+  const isTileStone = /marble|stone|granite|white|black|gold|pearl|rain|forest|sand|snow|pink|lava|opera|italian|oriental|panda|diamond|sheet|panel|ready/i.test(name);
   return {
     slug,
     name,
-    category: isMarbleStone ? 'marble' : 'panels',
+    category: isTileStone ? 'Tiles' : 'Interior',
     space: 'interior',
     finish: ['polished'],
     origin: 'Patna showroom',
@@ -1051,7 +1051,7 @@ function makeExtra(name) {
     description:
       'This product is available in our Patna showroom and can be quoted for your kitchen, wall, wardrobe, or feature panel requirement. Please confirm finish, shade, and size before final purchase.',
     specs: {
-      Material: isMarbleStone ? 'Natural marble / stone' : 'Decorative panel',
+      Material: isTileStone ? 'Natural tile / stone' : 'Decorative panel',
       Finish: 'Polished',
       Thickness: '18 mm',
       Application: 'Interior panels, walls, wardrobes',

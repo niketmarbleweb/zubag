@@ -39,7 +39,7 @@ function ProductsPage() {
           <div className="mt-10 rounded-xl border border-dashed border-stone bg-white p-8 text-center dark:border-white/10 dark:bg-white/5">
             <p className="font-display text-2xl">No product images found</p>
             <p className="mt-3 text-sm text-ink-soft dark:text-stone">
-              Add product images under public/Image/Interiorandmarble, public/Image/Interior, or public/Image/Marble to populate the catalogue.
+              Add product images to the public product image folders to populate the catalogue.
             </p>
             <Link to="/" className="mt-5 inline-block border border-gold px-5 py-3 text-[11px] uppercase tracking-[0.2em]">
               Return Home

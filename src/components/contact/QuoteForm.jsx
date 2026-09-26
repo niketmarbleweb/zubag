@@ -85,7 +85,7 @@ export default function QuoteForm({ compact = false }) {
           className="mt-1 w-full border border-stone bg-white px-3 py-2 text-sm outline-none focus:border-gold dark:border-white/15 dark:bg-white/5"
         >
           <option value="interior">Interior</option>
-          <option value="exterior">Marble Facade</option>
+          <option value="exterior">Tile Facade</option>
           <option value="both">Both</option>
         </select>
       </div>

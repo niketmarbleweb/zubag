@@ -1,0 +1,40 @@
+import { createFileRoute, Link, Outlet, useRouterState } from '@tanstack/react-router';
+import Seo from '../components/seo/Seo';
+import ProductCard from '../components/product/ProductCard';
+import { getProductsByCategory, tileSubcategories } from '../data/productCatalog';
+
+export const Route = createFileRoute('/marble')({
+  component: MarblePage,
+});
+
+function MarblePage() {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  if (pathname !== '/tiles') return <Outlet />;
+
+  const products = getProductsByCategory('Tiles');
+
+  return (
+    <>
+      <Seo title="Tiles Collection" description="Explore Italian, granite, pearl, onyx, and stone finishes." path="/tiles" />
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.24em] text-gold-deep dark:text-gold-light">Natural stone</p>
+            <h1 className="mt-3 font-display text-4xl sm:text-5xl">Tiles Collection</h1>
+          </div>
+          <p className="text-sm text-ink-soft dark:text-stone">{products.length} products</p>
+        </div>
+        <nav className="mt-6 flex flex-wrap gap-2" aria-label="Tile subcategories">
+          {tileSubcategories.map((item) => (
+            <Link key={item.slug} to={`/tiles/${item.slug}`} className="border border-stone px-3 py-2 text-[10px] uppercase tracking-[0.12em] text-ink-soft transition hover:border-gold hover:text-gold-deep dark:border-white/15 dark:text-stone">
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {products.map((product) => <ProductCard key={product.id} product={product} />)}
+        </div>
+      </section>
+    </>
+  );
+}

@@ -8,7 +8,7 @@ export default function Seo({
   image,
   jsonLd,
 }) {
-  const fullTitle = title.includes('Niket') ? title : `${title} | Niket Marble & Interior`;
+  const fullTitle = title.includes('Niket') ? title : `${title} | Niket Tiles & Interior`;
   const url = `${SITE_URL}${path === '/' ? '' : path}`;
   const ogImage = image || `${SITE_URL}/og-cover.svg`;
 

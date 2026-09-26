@@ -10,7 +10,7 @@ export default function AboutTeaser() {
         <Reveal className="img-zoom">
           <LazyImage
             src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=80"
-            alt="Craftsman inspecting a marble slab in the atelier"
+            alt="Craftsman inspecting a stone tile in the atelier"
             className="h-full min-h-[420px] w-full object-cover"
           />
         </Reveal>
@@ -18,12 +18,12 @@ export default function AboutTeaser() {
           <p className="text-[11px] uppercase tracking-[0.3em] text-gold-deep dark:text-gold-light">The atelier</p>
           <h2 className="mt-3 font-display text-4xl sm:text-5xl">Craftsmanship from quarry to courtyard</h2>
           <p className="mt-5 text-sm leading-relaxed text-ink-soft dark:text-stone">
-            For {company.years} years, Niket Marble & Interior has selected, fabricated, and installed natural
+            For {company.years} years, Niket Tiles & Interior has selected, fabricated, and installed natural
             stone for residences, hotels, and sacred spaces. We work as a quiet partner to architects —
             matching lots, photographing slabs, and speaking the language of thickness, sealer, and joint.
           </p>
           <p className="mt-4 text-sm leading-relaxed text-ink-soft dark:text-stone">
-            Our Patna showroom sits at the heart of India’s marble trade. From here we ship Makrana whites,
+            Our Patna showroom sits at the heart of India’s tile trade. From here we ship Makrana whites,
             Italian Statuario, South Indian granites, and desert sandstones to sites across the country.
           </p>
           <Button to="/about" className="mt-8">

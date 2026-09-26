@@ -44,6 +44,9 @@ export default function ProductCard({ product }) {
         <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-ink-soft dark:text-stone">
           Code: {product.code || product.slug || 'N/A'}
         </p>
+        <p className="mt-1 text-[10px] uppercase tracking-[0.14em] text-ink-soft dark:text-stone">
+          {product.subCategory || category}
+        </p>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-soft dark:text-stone">
           {short}
         </p>

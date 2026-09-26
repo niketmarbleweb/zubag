@@ -16,13 +16,36 @@ const assetModules = {
   ...import.meta.glob('/public/Image/Marble/**/*.{png,jpg,jpeg,webp,avif}', { eager: true, import: 'default' }),
 };
 
-export const productCategories = ['Interior', 'Exterior', 'Marble'];
+export const productCategories = ['Interior', 'Exterior', 'Tiles'];
+export const interiorSubcategories = [
+  { label: 'Bed Room', slug: 'bed-room' },
+  { label: 'Living Room', slug: 'living-room' },
+  { label: 'Hall', slug: 'hall' },
+  { label: 'Stairs', slug: 'stairs' },
+  { label: 'Wall Design', slug: 'wall-design' },
+  { label: 'Reception Counter', slug: 'reception-counter' },
+  { label: 'Ceiling', slug: 'ceiling' },
+  { label: 'Pillar', slug: 'pillar' },
+  { label: 'T.V Unit', slug: 'tv-unit' },
+  { label: 'Kitchen', slug: 'kitchen' },
+];
+export const tileSubcategories = [
+  { label: 'Italian Tiles', slug: 'italian-tiles' },
+  { label: 'White Tiles', slug: 'white-tiles' },
+  { label: 'Black Tiles', slug: 'black-tiles' },
+  { label: 'Granite', slug: 'granite' },
+  { label: 'Pearl Series', slug: 'pearl-series' },
+  { label: 'Onyx Series', slug: 'onyx-series' },
+  { label: 'Stone Finish', slug: 'stone-finish' },
+  { label: 'Travertine', slug: 'travertine' },
+  { label: 'Marriage Hall', slug: 'marriage-hall' },
+];
 export const categoryBadgeClasses = {
   Interior: 'border-blue-200 bg-blue-50 text-blue-800 dark:border-blue-400/30 dark:bg-blue-400/10 dark:text-blue-200',
-  Marble: 'border-emerald-200 bg-emerald-50 text-emerald-800 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-200',
+  Tiles: 'border-emerald-200 bg-emerald-50 text-emerald-800 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-200',
   Exterior: 'border-orange-200 bg-orange-50 text-orange-800 dark:border-orange-400/30 dark:bg-orange-400/10 dark:text-orange-200',
 };
-const marbleKeywords = ['MARBLE', 'ITALIAN', 'GRANITE', 'PEARL', 'ONYX', 'STONE', 'TRAVERTINE'];
+const tileKeywords = ['MARBLE', 'ITALIAN', 'GRANITE', 'PEARL', 'ONYX', 'STONE', 'TRAVERTINE'];
 const exteriorKeywords = ['WOOD', 'WPC', 'CLADDING', 'OUTDOOR', 'ELEVATION', 'EXTERIOR'];
 
 const normalizeAssetPath = (value) => {
@@ -40,6 +63,7 @@ const toDisplayName = (filename) => {
   return base
     .replace(/\s+/g, ' ')
     .trim()
+    .replace(/\bmarble\b/gi, 'Tiles')
     .toLowerCase()
     .replace(/\b\w/g, (char) => char.toUpperCase());
 };
@@ -55,16 +79,41 @@ const inferCategory = (name, source) => {
   const upperName = name.toUpperCase();
   const existingCategory = source && typeof source === 'object' ? source.category : '';
   if (productCategories.includes(existingCategory)) return existingCategory;
-  if (marbleKeywords.some((keyword) => upperName.includes(keyword))) return 'Marble';
+  if (tileKeywords.some((keyword) => upperName.includes(keyword))) return 'Tiles';
   if (exteriorKeywords.some((keyword) => upperName.includes(keyword))) return 'Interior';
-  if (typeof source === 'string' && source.includes('/Marble/')) return 'Marble';
   return 'Interior';
+};
+
+const inferSubcategory = (name, category) => {
+  const upperName = name.toUpperCase();
+  if (category === 'Tiles') {
+    if (upperName.includes('ITALIAN')) return 'Italian Tiles';
+    if (upperName.includes('WHITE')) return 'White Tiles';
+    if (upperName.includes('BLACK')) return 'Black Tiles';
+    if (upperName.includes('GRANITE')) return 'Granite';
+    if (upperName.includes('PEARL')) return 'Pearl Series';
+    if (upperName.includes('ONYX')) return 'Onyx Series';
+    if (upperName.includes('TRAVERTINE')) return 'Travertine';
+    return 'Stone Finish';
+  }
+
+  if (category === 'Exterior') return 'Elevation';
+  if (/BED|BEDROOM/.test(upperName)) return 'Bed Room';
+  if (/LIVING/.test(upperName)) return 'Living Room';
+  if (/STAIR/.test(upperName)) return 'Stairs';
+  if (/RECEPTION|COUNTER/.test(upperName)) return 'Reception Counter';
+  if (/CEILING/.test(upperName)) return 'Ceiling';
+  if (/PILLAR|COLUMN/.test(upperName)) return 'Pillar';
+  if (/TV|T\.V/.test(upperName)) return 'T.V Unit';
+  if (/KITCHEN/.test(upperName)) return 'Kitchen';
+  if (/HALL/.test(upperName)) return 'Hall';
+  return 'Wall Design';
 };
 
 const makeDescription = (name) => {
   const lower = name.toLowerCase();
   if (lower.includes('wood')) return 'Premium wood-inspired finish for elegant interiors and feature walls.';
-  if (lower.includes('marble')) return 'Premium decorative marble finish panel designed for refined, luxury interiors.';
+  if (lower.includes('marble')) return 'Premium decorative tile finish panel designed for refined, luxury interiors.';
   if (lower.includes('granite')) return 'Architectural stone-inspired finish with strength, depth, and lasting appeal.';
   if (lower.includes('panel')) return 'Versatile decorative panel for interiors, wardrobes, and custom furniture.';
   if (lower.includes('3d')) return 'Contemporary 3D textured finish for statement walls and feature applications.';
@@ -79,6 +128,7 @@ const imageProducts = Object.entries(assetModules)
     const name = toDisplayName(filename);
     const code = extractCode(filename);
     const category = inferCategory(name, source);
+    const subCategory = inferSubcategory(name, category);
     const space = category === 'Exterior' ? 'exterior' : 'interior';
     const description = makeDescription(name);
     const id = source
@@ -95,6 +145,7 @@ const imageProducts = Object.entries(assetModules)
       image,
       space,
       category,
+      subCategory,
       description,
       features: [
         'Premium finish',
@@ -111,18 +162,19 @@ const imageProducts = Object.entries(assetModules)
     };
   });
 
-const exteriorProducts = curatedProducts
-  .filter((product) => inferCategory(product.name, product) === 'Exterior')
+const curatedCatalogProducts = curatedProducts
   .map((product) => {
     const code = extractCode(product.name);
+    const category = inferCategory(product.name, product);
     return {
       id: product.slug,
       slug: product.slug,
       name: product.name,
       code,
       image: product.images?.[0] || productPlaceholder,
-      space: 'exterior',
-      category: 'Exterior',
+      space: product.space || 'interior',
+      category,
+      subCategory: inferSubcategory(product.name, category),
       description: product.description || product.short,
       features: [...(product.finish || []), ...(product.colors || [])],
       specifications: {
@@ -134,7 +186,16 @@ const exteriorProducts = curatedProducts
     };
   });
 
-export const productCatalog = [...imageProducts, ...exteriorProducts];
+export const productCatalog = [...imageProducts, ...curatedCatalogProducts];
+
+export const getProductsByCategory = (category) => productCatalog.filter((product) => product.category === category);
+
+export const getProductsBySubcategory = (category, slug) => {
+  const subcategories = category === 'Tiles' ? tileSubcategories : interiorSubcategories;
+  const subcategory = subcategories.find((item) => item.slug === slug);
+  if (!subcategory) return [];
+  return productCatalog.filter((product) => product.category === category && product.subCategory === subcategory.label);
+};
 
 export const getProductById = (id) => {
   if (!id) return null;

@@ -6,7 +6,7 @@ import { productCatalog } from '../../data/productCatalog';
 export default function FeaturedProducts() {
   const collections = [
     { category: 'Interior', description: 'Decorative finishes and surfaces for considered interiors.' },
-    { category: 'Marble', description: 'Natural marble and stone finishes selected for distinctive spaces.' },
+    { category: 'Tiles', description: 'Natural tile and stone finishes selected for distinctive spaces.' },
     { category: 'Exterior', description: 'Durable stone and cladding selections for exterior projects.' },
   ];
 

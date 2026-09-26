@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Outlet, useRouterState } from '@tanstack/react-router';
 import Seo from '../components/seo/Seo';
 import SpaceLanding from '../components/space/SpaceLanding';
 
@@ -7,11 +7,14 @@ export const Route = createFileRoute('/interior')({
 });
 
 function InteriorPage() {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  if (pathname !== '/interior') return <Outlet />;
+
   return (
     <>
       <Seo
-        title="Interior marble & stone solutions"
-        description="Marble flooring, cladding, kitchens, mandirs, and staircases by Niket Marble & Interior."
+        title="Interior tile & stone solutions"
+        description="Tile flooring, cladding, kitchens, mandirs, and staircases by Niket Tiles & Interior."
         path="/interior"
       />
       <SpaceLanding

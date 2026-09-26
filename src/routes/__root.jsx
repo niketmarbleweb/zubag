@@ -15,7 +15,7 @@ function RootLayout() {
       <a href="#main" className="skip-link">
         Skip to content
       </a>
-      <div className="marble-bg min-h-screen">
+      <div className="tile-bg min-h-screen">
         <Header />
         <main id="main">
           <Outlet />

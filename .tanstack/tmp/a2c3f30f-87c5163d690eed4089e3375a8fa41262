@@ -1,0 +1,11 @@
+import { createFileRoute } from '@tanstack/react-router';
+import ProductSubcategoryPage from '../components/space/ProductSubcategoryPage';
+
+export const Route = createFileRoute('/marble/$subcategory')({
+  component: MarbleSubcategoryRoute,
+});
+
+function MarbleSubcategoryRoute() {
+  const { subcategory } = Route.useParams();
+  return <ProductSubcategoryPage category="Tiles" slug={subcategory} />;
+}

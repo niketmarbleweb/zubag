@@ -39,7 +39,7 @@ function CataloguePage() {
     <>
       <Seo
         title="Product catalogue"
-        description="Browse Niket Marble & Interior products by category, name, and product code."
+        description="Browse Niket Tiles & Interior products by category, name, and product code."
         path="/catalogue"
       />
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
